@@ -1,4 +1,8 @@
 {
     // "python.pythonPath": "virtual/bin/python3.6"
-    "python.linting.pylintArgs": ["--load-plugins", "pylint_flask"]
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_flask"
+    ],
+    "python.pythonPath": "virtual/bin/python3.6"
 }
