@@ -1,3 +1,4 @@
+from flask import Flask
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
@@ -64,6 +65,12 @@ class Comments(db.Model):
     date_posted = db.Column(db.DateTime(250), default=datetime.utcnow)
     pitches_id = db.Column(db.Integer, db.ForeignKey("pitches.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+    db.init_app(app)
+
+    with app.app_context():
+        db.create_all()
 
     def save_comment(self):
         db.session.add(self)

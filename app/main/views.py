@@ -73,6 +73,8 @@ def update_profile(uname):
 
         db.session.add(user)
         db.session.commit()
+        with app.app_context():
+            db.create_all()
 
         return redirect(url_for('.profile',uname=user.author))
 

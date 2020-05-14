@@ -1,3 +1,5 @@
+from flask import Flask
+from flask import app
 from .import auth
 from flask import render_template,redirect,url_for, flash,request
 from ..models import User
@@ -24,10 +26,16 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(email = form.email.data,
-         author = form.author.data,
-         password = form.password.data)
+        user = User(email=form.email.data,
+         author=form.author.data,
+         password=form.password.data)
 
+        app = Flask(__name__)
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+        db.init_app(app)
+        with app.app_context():
+            db.create_all()
+        
         db.session.add(user)
         db.session.commit()
 
@@ -44,3 +52,4 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for("main.index"))
+    # form.user_items.choices = choices
