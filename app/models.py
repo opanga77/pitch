@@ -9,11 +9,11 @@ from datetime import datetime
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class User(UserMixin,db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer,primary_key = True)
+    id = db.Column(db.Integer, primary_key = True)
     author = db.Column(db.String(255))
-    email = db.Column(db.String(255),unique = True,index = True)
+    email = db.Column(db.String(255), unique = True,index = True)
     password_hash = db.Column(db.String(255))
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
@@ -36,7 +36,7 @@ class User(UserMixin,db.Model):
         return f'Author: {self.author}'
 
 class Pitches(db.Model):
-    __tablename__= 'pitches'
+    __tablename__ = 'pitches'
     id = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String(255))
     category = db.Column(db.String(255))
